@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>食品藥物實驗室 · 常見問題與表單下載</title>
+<style>
+  :root{
+    --ink:#1a2b33;
+    --muted:#5c6f78;
+    --line:#dfe6e9;
+    --bg:#f5f8f9;
+    --card:#ffffff;
+    --accent:#0f7d8c;
+    --accent-soft:#e5f2f3;
+    --shadow:0 1px 3px rgba(20,45,55,.06),0 4px 16px rgba(20,45,55,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px 64px}
+
+  header{
+    background:var(--accent);
+    color:#fff;
+    padding:32px 18px 28px;
+    text-align:center;
+  }
+  header .inner{max-width:720px;margin:0 auto}
+  header h1{font-size:1.35rem;font-weight:700;letter-spacing:.5px;line-height:1.4}
+  header .sub{font-size:.9rem;opacity:.85;margin-top:4px}
+  header p{font-size:.95rem;opacity:.9;margin-top:10px}
+
+  .search-box{
+    margin:-24px auto 28px;
+    max-width:720px;
+    position:relative;
+  }
+  #q{
+    width:100%;
+    padding:16px 18px 16px 48px;
+    font-size:1rem;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%235c6f78' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='9' cy='9' r='7'/%3E%3Cpath d='M14 14l4 4'/%3E%3C/svg%3E") no-repeat 16px center;
+    box-shadow:var(--shadow);
+    outline:none;
+  }
+  #q:focus{border-color:var(--accent)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+  .chip{
+    padding:8px 16px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:999px;
+    font-size:.9rem;
+    color:var(--accent);
+    cursor:pointer;
+    transition:.15s;
+  }
+  .chip:hover,.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  h2.section{font-size:1.05rem;margin:0 0 14px;display:flex;align-items:center;gap:8px}
+  h2.section::before{content:"";width:4px;height:18px;background:var(--accent);border-radius:2px}
+
+  .faq{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:30px}
+  .item{border-bottom:1px solid var(--line)}
+  .item:last-child{border-bottom:none}
+  .item.hidden{display:none}
+  .qbtn{
+    width:100%;
+    text-align:left;
+    padding:16px 46px 16px 18px;
+    background:none;border:none;
+    font-size:1rem;font-family:inherit;color:var(--ink);font-weight:500;
+    cursor:pointer;position:relative;
+  }
+  .qnum{color:var(--accent);font-weight:600;margin-right:2px}
+  .qbtn::after{
+    content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);
+    font-size:1.3rem;color:var(--accent);font-weight:400;
+  }
+  .item.open .qbtn::after{content:"–"}
+  .ans{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 18px}
+  .item.open .ans{max-height:800px;padding:0 18px 18px}
+  .ans p{color:var(--muted)}
+  .ans .fee-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.92rem}
+  .ans .fee-table td{padding:8px 10px;border:1px solid var(--line);color:var(--ink)}
+  .ans .fee-table td.price{white-space:nowrap;font-weight:600;color:var(--accent);text-align:right}
+  .ans .note{font-size:.85rem;color:var(--muted);margin-top:8px}
+  .ans .items-list{margin:8px 0 0;padding-left:22px}
+  .ans .items-list li{color:var(--ink);margin-bottom:7px;line-height:1.6}
+  .ans .items-list li strong{color:var(--accent)}
+
+  .forms{display:grid;gap:12px;margin-bottom:30px}
+  .form-card{
+    display:flex;align-items:center;gap:14px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;box-shadow:var(--shadow);text-decoration:none;color:inherit;
+    transition:.15s;
+  }
+  .form-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+  .form-card.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .form-card.primary .form-ico{background:rgba(255,255,255,.2)}
+  .form-card.primary .form-ico svg{stroke:#fff}
+  .form-card.primary .desc{color:rgba(255,255,255,.85)}
+  .form-card.primary .form-dl{color:#fff}
+  .form-ico{
+    flex-shrink:0;width:42px;height:42px;border-radius:10px;
+    background:var(--accent-soft);display:flex;align-items:center;justify-content:center;
+  }
+  .form-meta{flex:1;min-width:0}
+  .form-meta .name{font-weight:600;font-size:.98rem}
+  .form-meta .desc{font-size:.85rem;color:var(--muted)}
+  .form-dl{flex-shrink:0;font-size:.85rem;color:var(--accent);font-weight:600;white-space:nowrap}
+
+  .contact{
+    background:var(--accent-soft);border-radius:14px;padding:20px;
+    font-size:.92rem;color:var(--ink);
+  }
+  .contact .row{display:flex;gap:8px;margin-bottom:8px}
+  .contact .row:last-child{margin-bottom:0}
+  .contact .k{color:var(--muted);flex-shrink:0;min-width:52px}
+  .contact a{color:var(--accent);text-decoration:none;font-weight:600}
+
+  .empty{text-align:center;color:var(--muted);padding:30px;font-size:.92rem;display:none}
+
+  /* 流程圖 */
+  .flow{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:10px;
+    margin-bottom:30px;
+    padding-top:6px;
+  }
+  .flow-line{
+    position:absolute;top:33px;left:8%;right:8%;height:2px;
+    background:var(--line);z-index:0;
+  }
+  .flow-step{position:relative;z-index:1;text-align:center}
+  .flow-ico{
+    width:54px;height:54px;margin:0 auto 10px;
+    border-radius:50%;background:var(--card);
+    border:2px solid var(--accent-soft);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow);
+  }
+  .flow-ico svg{width:26px;height:26px}
+  .flow-num{font-size:.72rem;font-weight:700;color:var(--accent);letter-spacing:.5px}
+  .flow-name{font-size:.92rem;font-weight:600;margin:2px 0 4px}
+  .flow-desc{font-size:.75rem;color:var(--muted);line-height:1.5}
+  @media(max-width:600px){
+    .flow{grid-template-columns:repeat(3,1fr);gap:16px 8px}
+    .flow-line{display:none}
+    .flow-ico{width:48px;height:48px}
+    .flow-ico svg{width:23px;height:23px}
+  }
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:36px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <h1>正修科技大學 超微量研究科技中心 食品藥物實驗室<br>濫用藥物尿液採集檢驗資訊</h1>
+    <p>本頁提供因工作需求作濫用藥物尿液採集檢驗,常見問題與表單</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h2 class="section">檢驗服務流程</h2>
+  <div class="flow">
+    <div class="flow-line"></div>
+    <div class="flow-step">
+      <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 14.5A6.5 6.5 0 105 15l-1.5 4 4-1.3"/><path d="M8.5 9h5M8.5 12h3"/></svg></div>
+      <div class="flow-num">STEP 1</div>
+      <div class="flow-name">洽詢 / 預約</div>
+      <div class="flow-desc">電話洽詢；線上預約</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h6M9 16h6"/></svg></div>
+      <div class="flow-num">STEP 2</div>
+      <div class="flow-name">填寫委託單</div>
+      <div class="flow-desc">線上填寫或下載委託單</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 014 4v5a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M6 11a6 6 0 0012 0M12 17v4"/></svg></div>
+      <div class="flow-num">STEP 3</div>
+      <div class="flow-name">現場採檢</div>
+      <div class="flow-desc">攜帶有照片證件到場採尿</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/></svg></div>
+      <div class="flow-num">STEP 4</div>
+      <div class="flow-name">付款</div>
+      <div class="flow-desc">現場付款；公司統一付款</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+      <div class="flow-num">STEP 5</div>
+      <div class="flow-name">檢體分析</div>
+      <div class="flow-desc">約 7 個工作天（加價急件 3–5 天）</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13l3 3v13H4z"/><path d="M8 4v6h8M9 15l2 2 4-4"/></svg></div>
+      <div class="flow-num">STEP 6</div>
+      <div class="flow-name">領取報告</div>
+      <div class="flow-desc">郵寄、自取或電子報告</div>
+    </div>
+  </div>
+
+  <div class="search-box">
+    <input id="q" type="text" placeholder="輸入關鍵字,例如:費用、時間、位置…" autocomplete="off">
+  </div>
+
+  <div class="chips" id="chips">
+    <span class="chip active" data-cat="all">全部</span>
+    <span class="chip" data-cat="time">檢驗時間</span>
+    <span class="chip" data-cat="price">費用</span>
+    <span class="chip" data-cat="items">檢驗項目</span>
+    <span class="chip" data-cat="prep">採檢須知</span>
+    <span class="chip" data-cat="report">報告領取</span>
+    <span class="chip" data-cat="location">位置交通</span>
+  </div>
+
+  <h2 class="section">常見問題</h2>
+  <div class="faq" id="faq">
+
+    <div class="item" data-cat="time" data-kw="報告 多久 時間 幾天 出來 檢驗 工作天 隔日">
+      <button class="qbtn"><span class="qnum"></span>檢驗報告多久會出來?</button>
+      <div class="ans">
+        <p>收件或採尿後隔日起算,約 <strong>7 個工作天</strong>(不含週六、週日及國定假日)。</p>
+      </div>
+    </div>
+
+    <div class="item" data-cat="report" data-kw="報告 領取 拿 郵寄 掛號 自取 地址 退回 郵局 收件 證件 收據 本人">
+      <button class="qbtn"><span class="qnum"></span>檢驗報告如何領取?</button>
+      <div class="ans">
+        <p>報告可選擇電子報告、掛號郵寄紙本報告,或至實驗室自取紙本報告。</p>
+        <p class="note">選擇電子報告者,請於委託單填寫正確電子信箱。</p>
+        <p class="note">自取紙本報告請攜帶<strong>本人證件或收據</strong>領取。</p>
+        <p class="note">掛號郵寄紙本報告請務必填寫<strong>有人收件之地址,否則掛號將遭退回</strong>。</p>
+      </div>
+    </div>
+
+    <div class="item" data-cat="price" data-kw="費用 價錢 多少錢 收費 價格 錢 安非他命 鴉片 愷他命 搖頭丸 大麻">
+      <button class="qbtn"><span class="qnum"></span>檢驗費用是多少?</button>
+      <div class="ans">
+        <table class="fee-table">
+          <tr>
+            <td>五項檢驗<br><span style="font-size:.85rem;color:var(--muted)">安非他命類、鴉片代謝物類、愷他命代謝物類、搖頭丸類、大麻代謝物類</span></td>
+            <td class="price">1,800 元</td>
+          </tr>
+          <tr>
+            <td>二項檢驗<br><span style="font-size:.85rem;color:var(--muted)">安非他命類、鴉片代謝物類</span></td>
+            <td class="price">945 元</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="item" data-cat="prep" data-kw="帶什麼 準備 空腹 證件 身分證 健保卡 駕照 護照 居留證 須知 注意 藥物 感冒藥 退燒藥 止痛藥 中藥 生理期 進食">
+      <button class="qbtn"><span class="qnum"></span>來檢驗要帶什麼?需要注意什麼?</button>
+      <div class="ans">
+        <p>請攜帶<strong>有照片的證件</strong>(身分證、駕照或健保卡;外籍人員請帶護照或居留證)。</p>
+        <p class="note">採尿前 1–2 週請盡量不要服用任何藥物,尤其感冒藥、退燒藥、止痛藥、中藥等。慢性疾病患者請遵照醫囑服藥,切勿自行停藥。</p>
+        <p class="note">濫用藥物尿液檢驗<strong>不需空腹</strong>,採檢前可進食。女性遇生理期亦可檢驗,不影響結果。</p>
+      </div>
+    </div>
+
+    <div class="item" data-cat="location" data-kw="位置 地址 在哪 怎麼去 交通 停車 開車 校門 澄清路 警衛 換證 行政大樓">
+      <button class="qbtn"><span class="qnum"></span>實驗室的位置在哪裡?怎麼過去?</button>
+      <div class="ans">
+        <p>地址:<strong>高雄市鳥松區澄清路 840 號</strong>(正修科技大學正門口,行政大樓 2 樓 食品藥物實驗室)。</p>
+        <p class="note">請由澄清路大門進入,與警衛換證後將車停入停車場。第一棟即為行政大樓,上二樓後往右手邊走,即可看到食品藥物實驗室。</p>
+      </div>
+    </div>
+
+    <div class="item" data-cat="time" data-kw="收件 幾點 營業 時間 開門 星期 預約 採樣 多人 週一 週五 十人 委託單">
+      <button class="qbtn"><span class="qnum"></span>現場採驗時間是什麼時候?需要預約嗎?</button>
+      <div class="ans">
+        <p>週一至週五,上午 <strong>8:00–11:30</strong>、下午 <strong>1:30–4:30</strong>。</p>
+        <p class="note">同一時段 <strong>5 人(含)以上</strong> 之團體採檢,請先線上預約時段,並下載「尿液檢驗人員名單」填妥後 email 回傳。</p>
+        <p class="note">同時段未滿 5 位者無需預約,請於採檢時間直接到場填單採驗。</p>
+      </div>
+    </div>
+
+    <div class="item" data-cat="price" data-kw="付款 收據 發票 現金 報帳 抬頭 統一編號 統編 開立">
+      <button class="qbtn"><span class="qnum"></span>如何付款?可以開收據嗎?</button>
+      <div class="ans">
+        <p>付款方式分兩種情況,收據皆隨報告一併寄出:</p>
+        <p><strong>個人:</strong>現場付款,收據隨報告寄出。</p>
+        <p><strong>公司:</strong>統一由公司於報告寄出前付款,收據隨報告寄出。</p>
+        <p class="note">若有報帳需求,請於委託單的「收據資訊」欄填妥<strong>公司抬頭與統一編號</strong>。</p>
+      </div>
+    </div>
+
+    <div class="item" data-cat="price" data-kw="急件 加急 快 趕 幾天 費用 兩倍 加倍 3600">
+      <button class="qbtn"><span class="qnum"></span>可以做急件嗎?費用如何算?</button>
+      <div class="ans">
+        <p>可以。急件約 <strong>3–5 個工作天</strong> 發報告,費用為正常件的 <strong>兩倍</strong>。</p>
+        <p class="note">例如正常件 1,800 元,急件即為 3,600 元。</p>
+      </div>
+    </div>
+
+    <div class="item" data-cat="items" data-kw="檢驗項目 認證 衛福部 委驗 委託 海洛因 鴉片 安非他命 大麻 愷他命 古柯鹼 苯二氮平 卡西酮 苯乙胺 可接受 有哪些">
+      <button class="qbtn"><span class="qnum"></span>實驗室可接受委託檢驗的項目有哪些?</button>
+      <div class="ans">
+        <p>本實驗室為<strong>衛福部濫用藥物尿液認證檢驗機構</strong>,已通過認證、可接受委驗之項目如下:</p>
+        <ol class="items-list">
+          <li><strong>海洛因、鴉片代謝物:</strong>嗎啡及可待因</li>
+          <li><strong>安非他命類藥物:</strong>安非他命、甲基安非他命、MDMA 及 MDA</li>
+          <li><strong>大麻代謝物:</strong>四氫大麻酚-9-甲酸</li>
+          <li><strong>愷他命代謝物:</strong>愷他命、去甲基愷他命</li>
+          <li><strong>古柯鹼代謝物:</strong>苯甲醯基愛哥寧</li>
+          <li><strong>苯二氮平類:</strong>7-Aminonitrazepam、7-Aminonimetazepam、7-Aminoflunitrazepam</li>
+          <li><strong>卡西酮類:</strong>4-Methylmethcathinone、4-Methylephedrine、MEAPP、N-Ethylpentylone、Eutylone、Methyl-N,N-Dimethylcathinone、Methylcathinone、α-PiHP、Methylone、Methcathinone</li>
+          <li><strong>苯乙胺類:</strong>MMA、PMA</li>
+          <li><strong>其他:</strong>2-Fluorodeschloroketamine、Deschloroketamine、Chloroamphetamine、Etomidate、Metomidate、Isopropoxate、Propoxate</li>
+        </ol>
+        <p class="note">(資訊更新日:115.09.04)</p>
+      </div>
+    </div>
+
+    <div class="item" data-cat="location" data-kw="聯繫 聯絡 詢問 電話 信箱 email 洽詢 怎麼問 聯絡方式">
+      <button class="qbtn"><span class="qnum"></span>如何聯繫實驗室詢問?</button>
+      <div class="ans">
+        <p>電話:<a href="tel:077358800,2636"><strong>07-735-8800 分機 2636</strong></a></p>
+        <p>電子信箱:<a href="mailto:druglab@gcloud.csu.edu.tw"><strong>druglab@gcloud.csu.edu.tw</strong></a></p>
+        <p class="note">有任何問題,歡迎來電或來信洽詢實驗室。</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="empty" id="empty">找不到相關問題,請直接來電洽詢。</div>
+
+  <h2 class="section">線上服務</h2>
+  <div class="forms">
+
+    <a class="form-card primary" href="https://forms.gle/FnQWZWaR1RYPAus7A" target="_blank" rel="noopener">
+      <span class="form-ico"><svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="16" height="16" rx="2"/><path d="M3 9h16M8 2v4M14 2v4"/></svg></span>
+      <span class="form-meta">
+        <span class="name">線上預約採檢時段</span>
+        <span class="desc">同時段5 人以上採檢,可先線上預約</span>
+      </span>
+      <span class="form-dl">前往 →</span>
+    </a>
+
+    <a class="form-card primary" href="https://forms.gle/Y8AaJ2UeeZ8vrXsHA" target="_blank" rel="noopener">
+      <span class="form-ico"><svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h14v16H4z"/><path d="M8 9h6M8 13h6M8 17h3"/></svg></span>
+      <span class="form-meta">
+        <span class="name">線上填寫檢驗委託單</span>
+        <span class="desc">採檢前線上填寫委託單,預約後務必填寫委託單</span>
+      </span>
+      <span class="form-dl">前往 →</span>
+    </a>
+
+    <a class="form-card primary" href="https://forms.gle/SNTqa5xcWaVdN6aX6" target="_blank" rel="noopener">
+      <span class="form-ico"><svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="18" height="12" rx="2"/><path d="M2 9h18M6 13h4"/></svg></span>
+      <span class="form-meta">
+        <span class="name">線上匯款通知</span>
+        <span class="desc">完成匯款後,線上通知核對(現場已繳費者不用填)</span>
+      </span>
+      <span class="form-dl">前往 →</span>
+    </a>
+
+  </div>
+
+  <h2 class="section">表單下載</h2>
+  <div class="forms">
+
+    <a class="form-card" href="sampling-guide.docx" download>
+      <span class="form-ico"><svg width="22" height="22" fill="none" stroke="#0f7d8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v12M6 10l5 5 5-5M3 18h16"/></svg></span>
+      <span class="form-meta">
+        <span class="name">現場採尿說明</span>
+        <span class="desc">地點、時間、採尿須知</span>
+      </span>
+      <span class="form-dl">下載 ↓</span>
+    </a>
+
+    <a class="form-card" href="consignment-form.docx" download>
+      <span class="form-ico"><svg width="22" height="22" fill="none" stroke="#0f7d8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v12M6 10l5 5 5-5M3 18h16"/></svg></span>
+      <span class="form-meta">
+        <span class="name">濫用藥物尿液檢驗委託單(word檔案)</span>
+        <span class="desc">填妥後 email 回傳</span>
+      </span>
+      <span class="form-dl">下載 ↓</span>
+    </a>
+
+    <a class="form-card" href="personnel-list.xlsx" download>
+      <span class="form-ico"><svg width="22" height="22" fill="none" stroke="#0f7d8c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2v12M6 10l5 5 5-5M3 18h16"/></svg></span>
+      <span class="form-meta">
+        <span class="name">尿液檢驗人員名單(excel檔案)</span>
+        <span class="desc">團體(5 人以上)採檢人員名單,填妥後 email 回傳</span>
+      </span>
+      <span class="form-dl">下載 ↓</span>
+    </a>
+
+  </div>
+
+  <h2 class="section">聯絡我們</h2>
+  <div class="contact">
+    <div class="row"><span class="k">電話</span><span><a href="tel:077358800,2636">07-735-8800 分機 2636</a></span></div>
+    <div class="row"><span class="k">信箱</span><span><a href="mailto:druglab@gcloud.csu.edu.tw">druglab@gcloud.csu.edu.tw</a></span></div>
+    <div class="row"><span class="k">地址</span><span>高雄市鳥松區澄清路 840 號(正修科技大學正門口,行政大樓 2 樓 食品藥物實驗室)</span></div>
+    <div class="row"><span class="k">時間</span><span>週一至週五 08:00–11:30、13:30–16:30</span></div>
+  </div>
+
+  <footer>本頁資訊僅供參考,實際以現場公告為準<br>正修科技大學 超微量研究科技中心 食品藥物實驗室</footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.qbtn').forEach(btn=>{
+    btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open'));
+  });
+
+  const items=[...document.querySelectorAll('.item')];
+  const empty=document.getElementById('empty');
+  let activeCat='all';
+
+  function filter(){
+    const term=document.getElementById('q').value.trim().toLowerCase();
+    let shown=0;
+    items.forEach(it=>{
+      const catOK = activeCat==='all' || it.dataset.cat===activeCat;
+      const text = (it.textContent + ' ' + it.dataset.kw).toLowerCase();
+      const termOK = !term || text.includes(term);
+      const show = catOK && termOK;
+      it.classList.toggle('hidden',!show);
+      if(show) shown++;
+    });
+    empty.style.display = shown? 'none':'block';
+    // 重新編號目前顯示中的題目
+    let idx=0;
+    items.forEach(it=>{
+      if(!it.classList.contains('hidden')){
+        idx++;
+        const num=it.querySelector('.qnum');
+        if(num) num.textContent = idx + '. ';
+      }
+    });
+  }
+
+  document.getElementById('q').addEventListener('input',filter);
+  filter(); // 初始編號
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click',()=>{
+      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      activeCat=chip.dataset.cat;
+      filter();
+    });
+  });
+</script>
+
+</body>
+</html>
