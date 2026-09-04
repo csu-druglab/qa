@@ -36,7 +36,7 @@
   header .sub{font-size:.9rem;opacity:.85;margin-top:4px}
   header p{font-size:.95rem;opacity:.9;margin-top:10px}
   .quick-nav{position:sticky;top:0;z-index:10;display:flex;justify-content:center;gap:6px;flex-wrap:wrap;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(20,45,55,.08)}
-  .quick-nav a{padding:5px 10px;color:var(--accent);font-size:.82rem;font-weight:600;text-decoration:none;border-radius:6px}
+  .quick-nav a{padding:7px 12px;color:var(--accent);font-size:1rem;font-weight:600;text-decoration:none;border-radius:6px}
   .quick-nav a:hover,.quick-nav a:focus{background:var(--accent-soft);outline:none}
 
   .search-box{
@@ -152,9 +152,11 @@
     font-size:.92rem;color:var(--ink);
   }
   .contact .row{display:flex;gap:8px;margin-bottom:8px}
+  .contact .row > span:last-child{flex:1;min-width:0}
   .contact .row:last-child{margin-bottom:0}
   .contact .k{color:var(--muted);flex-shrink:0;min-width:52px}
   .contact a{color:var(--accent);text-decoration:none;font-weight:600}
+  .contact .plain-contact{color:var(--accent);font-weight:600}
 
   .empty{text-align:center;color:var(--muted);padding:30px;font-size:.92rem;display:none}
 
@@ -452,8 +454,8 @@
 
   <h2 class="section" id="contact">聯絡我們</h2>
   <div class="contact">
-    <div class="row"><span class="k">電話</span><span><a href="tel:077358800,2636">07-735-8800 分機 2636</a></span></div>
-    <div class="row"><span class="k">信箱</span><span><a href="mailto:druglab@gcloud.csu.edu.tw">druglab@gcloud.csu.edu.tw</a></span></div>
+    <div class="row"><span class="k">電話</span><span class="plain-contact">07-735-8800 分機 2636</span></div>
+    <div class="row"><span class="k">信箱</span><span class="plain-contact">druglab@gcloud.csu.edu.tw</span></div>
     <div class="row"><span class="k">地址</span><span>高雄市鳥松區澄清路 840 號(正修科技大學正門口,綜合行政大樓 2 樓 食品藥物實驗室)<br><a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=%E6%AD%A3%E4%BF%AE%E7%A7%91%E5%A4%A7%E5%AD%B8" target="_blank" rel="noopener">Google Maps 導航 ↗</a><span class="campus-map-wrap"><img class="campus-map" src="campus-map.png" alt="正修科技大學校園平面圖,紅色箭頭標示食品藥物實驗室位置"></span></span></div>
     <div class="row"><span class="k">時間</span><span>週一至週五 08:00–11:30、13:30–16:30</span></div>
   </div>
