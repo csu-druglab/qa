@@ -35,6 +35,9 @@
   header h1{font-size:1.35rem;font-weight:700;letter-spacing:.5px;line-height:1.4}
   header .sub{font-size:.9rem;opacity:.85;margin-top:4px}
   header p{font-size:.95rem;opacity:.9;margin-top:10px}
+  .quick-nav{position:sticky;top:0;z-index:10;display:flex;justify-content:center;gap:6px;flex-wrap:wrap;padding:8px 12px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 8px rgba(20,45,55,.08)}
+  .quick-nav a{padding:5px 10px;color:var(--accent);font-size:.82rem;font-weight:600;text-decoration:none;border-radius:6px}
+  .quick-nav a:hover,.quick-nav a:focus{background:var(--accent-soft);outline:none}
 
   .search-box{
     margin:-24px auto 28px;
@@ -55,6 +58,7 @@
 
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
   .chip{
+    appearance:none;
     padding:8px 16px;
     background:var(--card);
     border:1px solid var(--line);
@@ -101,11 +105,17 @@
   .ans .items-list li{color:var(--ink);margin-bottom:7px;line-height:1.6}
   .ans .items-list li strong{color:var(--accent)}
   .items-list{overflow-wrap:break-word;word-break:break-word}
+  .cert-details{margin-top:10px}
+  .cert-details summary{display:inline-block;padding:6px 10px;color:var(--accent);font-weight:600;cursor:pointer;border:1px solid var(--line);border-radius:6px}
+  .cert-details summary:hover,.cert-details summary:focus{background:var(--accent-soft)}
 
   .map-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 14px;background:var(--accent);color:#fff!important;border-radius:8px;text-decoration:none;font-size:.88rem;font-weight:600}
   .map-link:hover{background:#0a6572}
   .campus-map-wrap{display:block;position:relative;margin-top:14px;overflow:hidden;border-radius:8px;line-height:0}
   .campus-map{display:block;width:100%;height:auto}
+  .campus-map-wrap{cursor:zoom-in}
+  .campus-map-wrap.zoomed{position:fixed;inset:12px;z-index:30;margin:0;padding:12px;background:rgba(26,43,51,.94);border-radius:10px;cursor:zoom-out;display:flex;align-items:center;justify-content:center;line-height:normal}
+  .campus-map-wrap.zoomed .campus-map{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
 
   .forms{display:grid;gap:12px;margin-bottom:30px}
   .form-embed{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
@@ -113,6 +123,9 @@
   .form-embed .form-card:focus{outline:3px solid rgba(255,255,255,.7);outline-offset:-6px}
   .form-embed iframe{display:none;width:100%;min-height:720px;border:0;background:#fff}
   .form-embed.open iframe{display:block}
+  .form-fallback{display:none;padding:8px 18px 14px;text-align:right;color:var(--muted);font-size:.8rem}
+  .form-embed.open .form-fallback{display:block}
+  .form-fallback a{color:var(--accent);font-weight:600}
   .form-card{
     display:flex;align-items:center;gap:14px;
     background:var(--card);border:1px solid var(--line);border-radius:14px;
@@ -181,6 +194,9 @@
   }
 
   footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:36px;line-height:1.8}
+  .back-top{position:fixed;right:18px;bottom:18px;z-index:20;display:none;width:42px;height:42px;border:0;border-radius:50%;background:var(--accent);color:#fff;font-size:1.2rem;cursor:pointer;box-shadow:var(--shadow)}
+  .back-top.visible{display:block}
+  @media(max-width:600px){.quick-nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.quick-nav a{white-space:nowrap}.back-top{right:12px;bottom:12px}}
 </style>
 </head>
 <body>
@@ -191,6 +207,13 @@
     <p>本頁提供因工作需求作濫用藥物尿液採集檢驗,常見問題與表單</p>
   </div>
 </header>
+
+<nav class="quick-nav" aria-label="頁面快速導覽">
+  <a href="#faq-section">常見問題</a>
+  <a href="#online-services">線上服務</a>
+  <a href="#downloads">表單下載</a>
+  <a href="#contact">聯絡我們</a>
+</nav>
 
 <div class="wrap">
 
@@ -240,27 +263,27 @@
   </div>
 
   <div class="chips" id="chips">
-    <span class="chip active" data-cat="all">全部</span>
-    <span class="chip" data-cat="time">檢驗時間</span>
-    <span class="chip" data-cat="price">費用</span>
-    <span class="chip" data-cat="items">檢驗項目</span>
-    <span class="chip" data-cat="prep">採檢須知</span>
-    <span class="chip" data-cat="report">報告領取</span>
-    <span class="chip" data-cat="location">位置交通</span>
+    <button class="chip active" data-cat="all" aria-pressed="true">全部</button>
+    <button class="chip" data-cat="time" aria-pressed="false">檢驗時間</button>
+    <button class="chip" data-cat="price" aria-pressed="false">費用</button>
+    <button class="chip" data-cat="items" aria-pressed="false">檢驗項目</button>
+    <button class="chip" data-cat="prep" aria-pressed="false">採檢須知</button>
+    <button class="chip" data-cat="report" aria-pressed="false">報告領取</button>
+    <button class="chip" data-cat="location" aria-pressed="false">位置交通</button>
   </div>
 
-  <h2 class="section">常見問題</h2>
+  <h2 class="section" id="faq-section">常見問題</h2>
   <div class="faq" id="faq">
 
     <div class="item" data-cat="time" data-kw="報告 多久 時間 幾天 出來 檢驗 工作天 隔日">
-      <button class="qbtn"><span class="qnum"></span>檢驗報告多久會出來?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>檢驗報告多久會出來?</button>
       <div class="ans">
         <p>收件或採尿後隔日起算,約 <strong>7 個工作天</strong>(不含週六、週日及國定假日)。</p>
       </div>
     </div>
 
     <div class="item" data-cat="report" data-kw="報告 領取 拿 郵寄 掛號 自取 地址 退回 郵局 收件 證件 收據 本人">
-      <button class="qbtn"><span class="qnum"></span>檢驗報告如何領取?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>檢驗報告如何領取?</button>
       <div class="ans">
         <p>報告可選擇電子報告、掛號郵寄紙本報告,或至實驗室自取紙本報告。</p>
         <p class="note">選擇電子報告者,請於委託單填寫正確電子信箱。</p>
@@ -270,7 +293,7 @@
     </div>
 
     <div class="item" data-cat="price" data-kw="費用 價錢 多少錢 收費 價格 錢 安非他命 鴉片 愷他命 搖頭丸 大麻">
-      <button class="qbtn"><span class="qnum"></span>檢驗費用是多少?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>檢驗費用是多少?</button>
       <div class="ans">
         <div class="fee-table-wrap"><table class="fee-table">
           <tr>
@@ -286,7 +309,7 @@
     </div>
 
     <div class="item" data-cat="prep" data-kw="帶什麼 準備 空腹 證件 身分證 健保卡 駕照 護照 居留證 須知 注意 藥物 感冒藥 退燒藥 止痛藥 中藥 生理期 進食">
-      <button class="qbtn"><span class="qnum"></span>來檢驗要帶什麼?需要注意什麼?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>來檢驗要帶什麼?需要注意什麼?</button>
       <div class="ans">
         <p>請攜帶<strong>有照片的證件</strong>(身分證、駕照或健保卡;外籍人員請帶護照或居留證)。</p>
         <p class="note">採尿前 1–2 週請盡量不要服用任何藥物,尤其感冒藥、退燒藥、止痛藥、中藥等。慢性疾病患者請遵照醫囑服藥,切勿自行停藥。</p>
@@ -295,7 +318,7 @@
     </div>
 
     <div class="item" data-cat="location" data-kw="位置 地址 在哪 怎麼去 交通 停車 開車 校門 澄清路 警衛 換證 行政大樓">
-      <button class="qbtn"><span class="qnum"></span>實驗室的位置在哪裡?怎麼過去?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>實驗室的位置在哪裡?怎麼過去?</button>
       <div class="ans">
         <p>地址:<strong>高雄市鳥松區澄清路 840 號</strong>(正修科技大學正門口,綜合行政大樓 2 樓 食品藥物實驗室)。</p>
         <a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=%E6%AD%A3%E4%BF%AE%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%B8" target="_blank" rel="noopener">Google Maps 導航 ↗</a>
@@ -303,8 +326,9 @@
       </div>
     </div>
 
+      <div class="row"><span class="k">地址</span><span>高雄市鳥松區澄清路 840 號(正修科技大學正門口,綜合行政大樓 2 樓 食品藥物實驗室)<br><a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=%E6%AD%A3%E4%BF%AE%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%B8" target="_blank" rel="noopener">Google Maps 導航 ↗</a><span class="campus-map-wrap" role="button" tabindex="0" aria-label="點擊放大校園平面圖"><img class="campus-map" src="campus-map.png" alt="正修科技大學校園平面圖,紅色箭頭標示食品藥物實驗室位置"></span></span></div>
     <div class="item" data-cat="time" data-kw="收件 幾點 營業 時間 開門 星期 預約 採樣 多人 週一 週五 十人 委託單">
-      <button class="qbtn"><span class="qnum"></span>現場採驗時間是什麼時候?需要預約嗎?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>現場採驗時間是什麼時候?需要預約嗎?</button>
       <div class="ans">
         <p>週一至週五,上午 <strong>8:00–11:30</strong>、下午 <strong>1:30–4:30</strong>。</p>
         <p class="note">同一時段 <strong>5 人(含)以上</strong> 之團體採檢,請先線上預約時段,並下載「尿液檢驗人員名單」填妥後 email 回傳。</p>
@@ -313,7 +337,7 @@
     </div>
 
     <div class="item" data-cat="price" data-kw="付款 收據 發票 現金 報帳 抬頭 統一編號 統編 開立">
-      <button class="qbtn"><span class="qnum"></span>如何付款?可以開收據嗎?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>如何付款?可以開收據嗎?</button>
       <div class="ans">
         <p>付款方式分兩種情況,收據皆隨報告一併寄出:</p>
         <p><strong>個人:</strong>現場付款,收據隨報告寄出。</p>
@@ -323,7 +347,7 @@
     </div>
 
     <div class="item" data-cat="price" data-kw="急件 加急 快 趕 幾天 費用 兩倍 加倍 3600">
-      <button class="qbtn"><span class="qnum"></span>可以做急件嗎?費用如何算?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>可以做急件嗎?費用如何算?</button>
       <div class="ans">
         <p>可以。急件約 <strong>3–5 個工作天</strong> 發報告,費用為正常件的 <strong>兩倍</strong>。</p>
         <p class="note">例如正常件 1,800 元,急件即為 3,600 元。</p>
@@ -331,10 +355,10 @@
     </div>
 
     <div class="item" data-cat="items" data-kw="檢驗項目 認證 衛福部 委驗 委託 海洛因 鴉片 安非他命 大麻 愷他命 古柯鹼 苯二氮平 卡西酮 苯乙胺 可接受 有哪些">
-      <button class="qbtn"><span class="qnum"></span>實驗室可接受委託檢驗的項目有哪些?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>實驗室可接受委託檢驗的項目有哪些?</button>
       <div class="ans">
         <p>本實驗室為<strong>衛福部濫用藥物尿液認證檢驗機構</strong>,已通過認證、可接受委驗之項目如下:</p>
-        <ol class="items-list">
+        <details class="cert-details"><summary>查看完整認證項目</summary><ol class="items-list">
           <li><strong>海洛因、鴉片代謝物:</strong>嗎啡及可待因</li>
           <li><strong>安非他命類藥物:</strong>安非他命、甲基安非他命、MDMA 及 MDA</li>
           <li><strong>大麻代謝物:</strong>四氫大麻酚-9-甲酸</li>
@@ -344,13 +368,13 @@
           <li><strong>卡西酮類:</strong>4-Methylmethcathinone、4-Methylephedrine、MEAPP、N-Ethylpentylone、Eutylone、Methyl-N,N-Dimethylcathinone、Methylcathinone、α-PiHP、Methylone、Methcathinone</li>
           <li><strong>苯乙胺類:</strong>MMA、PMA</li>
           <li><strong>其他:</strong>2-Fluorodeschloroketamine、Deschloroketamine、Chloroamphetamine、Etomidate、Metomidate、Isopropoxate、Propoxate</li>
-        </ol>
+        </ol></details>
         <p class="note">(資訊更新日:115.09.04)</p>
       </div>
     </div>
 
     <div class="item" data-cat="location" data-kw="聯繫 聯絡 詢問 電話 信箱 email 洽詢 怎麼問 聯絡方式">
-      <button class="qbtn"><span class="qnum"></span>如何聯繫實驗室詢問?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>如何聯繫實驗室詢問?</button>
       <div class="ans">
         <p>電話:<a href="tel:077358800,2636"><strong>07-735-8800 分機 2636</strong></a></p>
         <p>電子信箱:<a href="mailto:druglab@gcloud.csu.edu.tw"><strong>druglab@gcloud.csu.edu.tw</strong></a></p>
@@ -362,7 +386,7 @@
 
   <div class="empty" id="empty">找不到相關問題,請直接來電洽詢。</div>
 
-  <h2 class="section">線上服務</h2>
+  <h2 class="section" id="online-services">線上服務</h2>
   <div class="forms">
 
     <div class="form-embed"><div class="form-card primary" role="button" tabindex="0" aria-expanded="false">
@@ -371,8 +395,8 @@
         <span class="name">線上預約採檢時段</span>
         <span class="desc">同時段5 人以上採檢,可先線上預約</span>
       </span>
-      <span class="form-dl">前往 →</span>
-    </div><iframe data-src="https://forms.gle/FnQWZWaR1RYPAus7A" title="線上預約採檢時段表單" loading="lazy"></iframe></div>
+      <span class="form-dl">點擊開啟表單</span>
+    </div><iframe data-src="https://forms.gle/FnQWZWaR1RYPAus7A" title="線上預約採檢時段表單" loading="lazy"></iframe><p class="form-fallback">表單無法載入？<a href="https://forms.gle/FnQWZWaR1RYPAus7A" target="_blank" rel="noopener">另開表單</a></p></div>
 
     <div class="form-embed"><div class="form-card primary" role="button" tabindex="0" aria-expanded="false">
       <span class="form-ico"><svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h14v16H4z"/><path d="M8 9h6M8 13h6M8 17h3"/></svg></span>
@@ -380,8 +404,8 @@
         <span class="name">線上填寫檢驗委託單</span>
         <span class="desc">採檢前線上填寫委託單,預約後務必填寫委託單</span>
       </span>
-      <span class="form-dl">前往 →</span>
-    </div><iframe data-src="https://forms.gle/Y8AaJ2UeeZ8vrXsHA" title="線上填寫檢驗委託單表單" loading="lazy"></iframe></div>
+      <span class="form-dl">點擊開啟表單</span>
+    </div><iframe data-src="https://forms.gle/Y8AaJ2UeeZ8vrXsHA" title="線上填寫檢驗委託單表單" loading="lazy"></iframe><p class="form-fallback">表單無法載入？<a href="https://forms.gle/Y8AaJ2UeeZ8vrXsHA" target="_blank" rel="noopener">另開表單</a></p></div>
 
     <div class="form-embed"><div class="form-card primary" role="button" tabindex="0" aria-expanded="false">
       <span class="form-ico"><svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="18" height="12" rx="2"/><path d="M2 9h18M6 13h4"/></svg></span>
@@ -389,12 +413,12 @@
         <span class="name">線上匯款通知</span>
         <span class="desc">完成匯款後,線上通知核對(現場已繳費者不用填)</span>
       </span>
-      <span class="form-dl">前往 →</span>
-    </div><iframe data-src="https://forms.gle/SNTqa5xcWaVdN6aX6" title="線上匯款通知表單" loading="lazy"></iframe></div>
+      <span class="form-dl">點擊開啟表單</span>
+    </div><iframe data-src="https://forms.gle/SNTqa5xcWaVdN6aX6" title="線上匯款通知表單" loading="lazy"></iframe><p class="form-fallback">表單無法載入？<a href="https://forms.gle/SNTqa5xcWaVdN6aX6" target="_blank" rel="noopener">另開表單</a></p></div>
 
   </div>
 
-  <h2 class="section">表單下載</h2>
+  <h2 class="section" id="downloads">表單下載</h2>
   <div class="forms">
 
     <a class="form-card" href="sampling-guide.docx" download>
@@ -426,7 +450,7 @@
 
   </div>
 
-  <h2 class="section">聯絡我們</h2>
+  <h2 class="section" id="contact">聯絡我們</h2>
   <div class="contact">
     <div class="row"><span class="k">電話</span><span><a href="tel:077358800,2636">07-735-8800 分機 2636</a></span></div>
     <div class="row"><span class="k">信箱</span><span><a href="mailto:druglab@gcloud.csu.edu.tw">druglab@gcloud.csu.edu.tw</a></span></div>
@@ -434,13 +458,24 @@
     <div class="row"><span class="k">時間</span><span>週一至週五 08:00–11:30、13:30–16:30</span></div>
   </div>
 
-  <footer>本頁資訊僅供參考,實際以現場公告為準<br>正修科技大學 超微量研究科技中心 食品藥物實驗室</footer>
+  <footer>本頁資訊僅供參考,實際以現場公告為準<br>最後更新: 2026 年 9 月 4 日<br>正修科技大學 超微量研究科技中心 食品藥物實驗室</footer>
 
 </div>
 
+<button class="back-top" type="button" aria-label="回到頁面頂端" title="回到頁面頂端">↑</button>
+
 <script>
   document.querySelectorAll('.qbtn').forEach(btn=>{
-    btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open'));
+    btn.addEventListener('click',()=>{
+      const item=btn.parentElement;
+      const isOpen=!item.classList.contains('open');
+      document.querySelectorAll('.item.open').forEach(other=>{
+        other.classList.remove('open');
+        other.querySelector('.qbtn').setAttribute('aria-expanded','false');
+      });
+      item.classList.toggle('open',isOpen);
+      btn.setAttribute('aria-expanded',String(isOpen));
+    });
   });
 
   const items=[...document.querySelectorAll('.item')];
@@ -492,12 +527,36 @@
   filter(); // 初始編號
   document.querySelectorAll('.chip').forEach(chip=>{
     chip.addEventListener('click',()=>{
-      document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+      document.querySelectorAll('.chip').forEach(c=>{
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed','false');
+      });
       chip.classList.add('active');
+      chip.setAttribute('aria-pressed','true');
       activeCat=chip.dataset.cat;
       filter();
     });
   });
+
+  document.querySelectorAll('.faq > .row').forEach(row=>row.remove());
+  const map=document.querySelector('.contact .campus-map-wrap');
+  map.setAttribute('role','button');
+  map.setAttribute('tabindex','0');
+  map.setAttribute('aria-label','點擊放大校園平面圖');
+  map.addEventListener('click',()=>map.classList.toggle('zoomed'));
+  map.addEventListener('keydown',event=>{
+    if(event.key==='Enter' || event.key===' '){
+      event.preventDefault();
+      map.classList.toggle('zoomed');
+    }
+  });
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape') map.classList.remove('zoomed');
+  });
+
+  const backTop=document.querySelector('.back-top');
+  window.addEventListener('scroll',()=>backTop.classList.toggle('visible',window.scrollY>400));
+  backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 </script>
 
 </body>
