@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="正修科技大學 超微量研究科技中心 食品藥物實驗室 — 濫用藥物尿液採集檢驗常見問題、線上預約與表單下載。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AA%3C/text%3E%3C/svg%3E">
 <title>食品藥物實驗室 · 常見問題與表單下載</title>
 <style>
   :root{
@@ -16,12 +18,15 @@
     --shadow:0 1px 3px rgba(20,45,55,.06),0 4px 16px rgba(20,45,55,.05);
   }
   *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{
     font-family:"Noto Sans TC","Microsoft JhengHei",-apple-system,sans-serif;
     color:var(--ink);
     background:var(--bg);
     line-height:1.7;
     -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+    text-size-adjust:100%;-webkit-text-size-adjust:100%;
   }
   .wrap{max-width:720px;margin:0 auto;padding:0 18px 64px}
 
@@ -70,7 +75,7 @@
   }
   .chip:hover,.chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
 
-  h2.section{font-size:1.05rem;margin:0 0 14px;display:flex;align-items:center;gap:8px}
+  h2.section{font-size:1.05rem;margin:0 0 14px;display:flex;align-items:center;gap:8px;scroll-margin-top:64px}
   h2.section::before{content:"";width:4px;height:18px;background:var(--accent);border-radius:2px}
 
   .faq{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:30px}
@@ -93,7 +98,7 @@
   }
   .item.open .qbtn::after{content:"–"}
   .ans{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 18px}
-  .item.open .ans{max-height:800px;padding:0 18px 18px}
+  .item.open .ans{max-height:2200px;padding:0 18px 18px}
   .ans p{color:var(--muted)}
   .ans .fee-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:.92rem}
   .fee-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -111,9 +116,8 @@
 
   .map-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 14px;background:var(--accent);color:#fff!important;border-radius:8px;text-decoration:none;font-size:.88rem;font-weight:600}
   .map-link:hover{background:#0a6572}
-  .campus-map-wrap{display:block;position:relative;margin-top:14px;overflow:hidden;border-radius:8px;line-height:0}
+  .campus-map-wrap{display:block;position:relative;margin-top:14px;overflow:hidden;border-radius:8px;line-height:0;cursor:zoom-in}
   .campus-map{display:block;width:100%;height:auto}
-  .campus-map-wrap{cursor:zoom-in}
   .campus-map-wrap.zoomed{position:fixed;inset:12px;z-index:30;margin:0;padding:12px;background:rgba(26,43,51,.94);border-radius:10px;cursor:zoom-out;display:flex;align-items:center;justify-content:center;line-height:normal}
   .campus-map-wrap.zoomed .campus-map{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
 
@@ -186,6 +190,8 @@
   .flow-name{font-size:.92rem;font-weight:600;margin:2px 0 4px}
   .flow-desc{font-size:.75rem;color:var(--muted);line-height:1.5}
   @media(max-width:600px){
+    header{padding:24px 16px 22px}
+    header h1{font-size:1.2rem}
     .form-embed iframe{min-height:820px}
     .contact .row{align-items:flex-start}
     .contact .row > span:last-child{min-width:0;overflow-wrap:anywhere}
@@ -193,12 +199,43 @@
     .flow-line{display:none}
     .flow-ico{width:48px;height:48px}
     .flow-ico svg{width:23px;height:23px}
+    /* 手機:費用表改為上下堆疊,價格直接顯示、不需左右滑 */
+    .fee-table-wrap{overflow-x:visible}
+    .ans .fee-table{min-width:0}
+    .ans .fee-table,.ans .fee-table tbody,.ans .fee-table tr,.ans .fee-table td{display:block;width:100%}
+    .ans .fee-table tr{border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
+    .ans .fee-table tr:last-child{margin-bottom:0}
+    .ans .fee-table td{border:none;padding:10px 12px 4px}
+    .ans .fee-table td.price{padding:0 12px 12px;text-align:right;font-size:1.05rem}
+    /* 手機:加大可點區域 */
+    .quick-nav a{padding:9px 12px}
+    .chip{padding:9px 16px}
+    .qbtn{padding:16px 44px 16px 16px}
+    .ans{padding:0 16px}
+    .item.open .ans{padding:0 16px 16px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
   }
 
   footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:36px;line-height:1.8}
   .back-top{position:fixed;right:18px;bottom:18px;z-index:20;display:none;width:42px;height:42px;border:0;border-radius:50%;background:var(--accent);color:#fff;font-size:1.2rem;cursor:pointer;box-shadow:var(--shadow)}
   .back-top.visible{display:block}
   @media(max-width:600px){.quick-nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}.quick-nav a{white-space:nowrap}.back-top{right:12px;bottom:12px}}
+
+  /* 列印:展開全部內容、隱藏互動元件 */
+  @media print{
+    .quick-nav,.search-box,.chips,.back-top,.empty,
+    .form-embed iframe,.form-fallback,.map-link{display:none!important}
+    header{background:none!important;color:var(--ink)!important;padding-top:0}
+    .item.filtered{max-height:none!important;opacity:1!important;border-bottom-width:1px!important}
+    .ans,.item.open .ans{max-height:none!important;overflow:visible!important;padding:0 18px 14px!important}
+    .qbtn::after{display:none}
+    .cert-details>.items-list{display:block!important}
+    .faq,.form-card,.contact{box-shadow:none!important}
+    a[href]{color:var(--ink)!important}
+  }
 </style>
 </head>
 <body>
@@ -206,7 +243,7 @@
 <header>
   <div class="inner">
     <h1>正修科技大學 超微量研究科技中心 食品藥物實驗室<br>濫用藥物尿液採集檢驗資訊</h1>
-    <p>本頁提供因工作需求作濫用藥物尿液採集檢驗,常見問題與表單</p>
+    <p>本頁提供因工作需求執行濫用藥物尿液採集檢驗,常見問題與表單</p>
   </div>
 </header>
 
@@ -238,13 +275,13 @@
       <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 014 4v5a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M6 11a6 6 0 0012 0M12 17v4"/></svg></div>
       <div class="flow-num">STEP 3</div>
       <div class="flow-name">現場採檢</div>
-      <div class="flow-desc">攜帶有照片證件到場採尿</div>
+      <div class="flow-desc">攜帶有照片證件到場</div>
     </div>
     <div class="flow-step">
       <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/></svg></div>
       <div class="flow-num">STEP 4</div>
       <div class="flow-name">付款</div>
-      <div class="flow-desc">現場付款；公司統一付款</div>
+      <div class="flow-desc">現金或匯款</div>
     </div>
     <div class="flow-step">
       <div class="flow-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0f7d8c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
@@ -328,12 +365,11 @@
       </div>
     </div>
 
-      <div class="row"><span class="k">地址</span><span>高雄市鳥松區澄清路 840 號(正修科技大學正門口,綜合行政大樓 2 樓 食品藥物實驗室)<br><a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=%E6%AD%A3%E4%BF%AE%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%B8" target="_blank" rel="noopener">Google Maps 導航 ↗</a><span class="campus-map-wrap" role="button" tabindex="0" aria-label="點擊放大校園平面圖"><img class="campus-map" src="campus-map.png" alt="正修科技大學校園平面圖,紅色箭頭標示食品藥物實驗室位置"></span></span></div>
     <div class="item" data-cat="time" data-kw="收件 幾點 營業 時間 開門 星期 預約 採樣 多人 週一 週五 十人 委託單">
       <button class="qbtn" aria-expanded="false"><span class="qnum"></span>現場採驗時間是什麼時候?需要預約嗎?</button>
       <div class="ans">
         <p>週一至週五,上午 <strong>8:00–11:30</strong>、下午 <strong>1:30–4:30</strong>。</p>
-        <p class="note">同一時段 <strong>5 人(含)以上</strong> 之團體採檢,請先線上預約時段,並下載「尿液檢驗人員名單」填妥後 email 回傳。</p>
+        <p class="note">同一時段 <strong>5 人(含)以上</strong> 之團體採檢,可線上預約時段,並下載「尿液檢驗人員名單」與「檢驗委託單」填妥後 email 回傳。</p>
         <p class="note">同時段未滿 5 位者無需預約,請於採檢時間直接到場填單採驗。</p>
       </div>
     </div>
@@ -342,7 +378,7 @@
       <button class="qbtn" aria-expanded="false"><span class="qnum"></span>如何付款?可以開收據嗎?</button>
       <div class="ans">
         <p>付款方式分兩種情況,收據皆隨報告一併寄出:</p>
-        <p><strong>個人:</strong>現場付款,收據隨報告寄出。</p>
+        <p><strong>個人:</strong>現金或匯款,收據隨報告寄出。</p>
         <p><strong>公司:</strong>統一由公司於報告寄出前付款,收據隨報告寄出。</p>
         <p class="note">若有報帳需求,請於委託單的「收據資訊」欄填妥<strong>公司抬頭與統一編號</strong>。</p>
       </div>
@@ -376,9 +412,9 @@
     </div>
 
     <div class="item" data-cat="location" data-kw="聯繫 聯絡 詢問 電話 信箱 email 洽詢 怎麼問 聯絡方式">
-      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>如何聯繫實驗室詢問?</button>
+      <button class="qbtn" aria-expanded="false"><span class="qnum"></span>尚有其他問題，如何聯繫實驗室詢問?</button>
       <div class="ans">
-        <p>電話:<a href="tel:077358800,2636"><strong>07-735-8800 分機 2636</strong></a></p>
+        <p>電話:<a href="tel:077358800,2636"><strong>07-7358800 分機 2636</strong></a></p>
         <p>電子信箱:<a href="mailto:druglab@gcloud.csu.edu.tw"><strong>druglab@gcloud.csu.edu.tw</strong></a></p>
         <p class="note">有任何問題,歡迎來電或來信洽詢實驗室。</p>
       </div>
@@ -454,9 +490,9 @@
 
   <h2 class="section" id="contact">聯絡我們</h2>
   <div class="contact">
-    <div class="row"><span class="k">電話</span><span class="plain-contact">07-735-8800 分機 2636</span></div>
-    <div class="row"><span class="k">信箱</span><span class="plain-contact">druglab@gcloud.csu.edu.tw</span></div>
-    <div class="row"><span class="k">地址</span><span>高雄市鳥松區澄清路 840 號(正修科技大學正門口,綜合行政大樓 2 樓 食品藥物實驗室)<br><a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=%E6%AD%A3%E4%BF%AE%E7%A7%91%E5%A4%A7%E5%AD%B8" target="_blank" rel="noopener">Google Maps 導航 ↗</a><span class="campus-map-wrap"><img class="campus-map" src="campus-map.png" alt="正修科技大學校園平面圖,紅色箭頭標示食品藥物實驗室位置"></span></span></div>
+    <div class="row"><span class="k">電話</span><span><a href="tel:077358800,2636" class="plain-contact">07-735-8800 分機 2636</a></span></div>
+    <div class="row"><span class="k">信箱</span><span><a href="mailto:druglab@gcloud.csu.edu.tw" class="plain-contact">druglab@gcloud.csu.edu.tw</a></span></div>
+    <div class="row"><span class="k">地址</span><span>高雄市鳥松區澄清路 840 號(正修科技大學正門口,綜合行政大樓 2 樓 食品藥物實驗室)<br><a class="map-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=%E6%AD%A3%E4%BF%AE%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%B8" target="_blank" rel="noopener">Google Maps 導航 ↗</a><span class="campus-map-wrap"><img class="campus-map" src="campus-map.png" alt="正修科技大學校園平面圖,紅色箭頭標示食品藥物實驗室位置"></span></span></div>
     <div class="row"><span class="k">時間</span><span>週一至週五 08:00–11:30、13:30–16:30</span></div>
   </div>
 
@@ -540,7 +576,6 @@
     });
   });
 
-  document.querySelectorAll('.faq > .row').forEach(row=>row.remove());
   const map=document.querySelector('.contact .campus-map-wrap');
   map.setAttribute('role','button');
   map.setAttribute('tabindex','0');
